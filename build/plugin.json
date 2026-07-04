@@ -1,0 +1,7 @@
+{
+  "id": "wam.plugin.sample",
+  "displayName": "Sample Plugin",
+  "version": "1.0.0",
+  "entryAssembly": "Wam.Plugins.Sample.dll",
+  "targetCoreVersion": "0.3.0"
+}
