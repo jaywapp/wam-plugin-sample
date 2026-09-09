@@ -67,10 +67,10 @@ public sealed class SampleSettings
     public static SampleSettings From(IPluginSettingsStore store) =>
         From(store.Load(SamplePlugin.Id));
 
-    public static SampleSettings From(PluginSettingsValues v) => new()
+    public static SampleSettings From(PluginSettingsValues? v) => new()
     {
-        ServerUrl = v.GetString("serverUrl") ?? "https://example.com",
-        ApiKey = v.GetString("apiKey") ?? "",
-        Verbose = v.GetBool("verbose"),
+        ServerUrl = v?.GetString("serverUrl") ?? "https://example.com",
+        ApiKey = v?.GetString("apiKey") ?? "",
+        Verbose = v?.GetBool("verbose") ?? false,
     };
 }

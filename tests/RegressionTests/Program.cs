@@ -1,0 +1,12 @@
+using Wam.Core.Plugins;
+using Wam.Plugins.Sample;
+var defaults = SampleSettings.From((PluginSettingsValues?)null);
+Check.That(defaults.ServerUrl == "https://example.com" && !defaults.Verbose && defaults.ApiKey == "", "Null defaults");
+Check.That(!SampleSettings.From(new PluginSettingsValues(new Dictionary<string,string> { ["verbose"] = "invalid" })).Verbose, "Invalid boolean");
+var settings = SampleSettings.From(new PluginSettingsValues(new Dictionary<string,string> { ["serverUrl"] = "", ["verbose"] = "true" }));
+Check.That(settings.ServerUrl == "" && settings.Verbose, "Existing explicit empty URL semantics");
+var node = new SamplePlugin().GetNodeTypes().Single();
+Check.That(node.NodeTypeId == "sample.ticket", "Node ID");
+Check.That(new SamplePlugin().GetRelationTypes().Single().RelationTypeId == "sample.resolves", "Relation ID");
+Check.That(new SamplePlugin().GetSettingsPages().Count() == 1, "Settings schema");
+Console.WriteLine($"PASS {Check.Count} sample settings regression checks");
